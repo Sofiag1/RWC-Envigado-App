@@ -5620,7 +5620,8 @@ ul li a:focus {
   z-index: -1;
   width: 100%;
   height: 100%;
-  display: none
+  display: none;
+  overflow: scroll;
 }
 
 #mimin-mobile-menu-opener{
@@ -5646,9 +5647,9 @@ ul li a:focus {
 .sub-mimin-mobile-menu-list {
   display: none;
   padding: 0;
-  height: 300px;
+  height: auto;
   font-weight: 100;
-  overflow: auto;
+  overflow: auto!important;
   font-size: 2em;
 }
 
