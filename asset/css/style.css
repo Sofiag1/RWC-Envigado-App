@@ -6452,7 +6452,7 @@ ul li a:focus {
     position: absolute;
     left: 35%;
   }
-}
+}add
 
 
 @media only screen and (max-width: 479px) { 
@@ -6486,4 +6486,10 @@ ul li a:focus {
     display: none;
   }
 
+}
+
+
+rwc {
+    max-width:100%;
+    height: auto;
 }
