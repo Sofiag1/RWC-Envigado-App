@@ -7,7 +7,7 @@
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Miminium</title>
+  <title>RWC Envigado</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css">
@@ -47,19 +47,19 @@
                     <label>Username</label>
                   </div>
                   <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                    <input type="text" class="form-text" required>
+                    <input id="email" type="text" class="form-text" required>
                     <span class="bar"></span>
                     <label>Email</label>
                   </div>
                   <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                    <input type="password" class="form-text" required>
+                    <input id="password" type="password" class="form-text" required>
                     <span class="bar"></span>
                     <label>Password</label>
                   </div>
                   <label class="pull-left">
                   <input type="checkbox" class="icheck pull-left" name="checkbox1"/> &nbsp Agree the terms and policy
                   </label>
-                  <input type="submit" class="btn col-md-12" value="SignUp"/>
+                  <input type="submit" class="btn col-md-12" value="SignUp" onclick="registerEvent();"/>
               </div>
                 <div class="text-center" style="padding:5px;">
                     <a href="login.html">Already have an account?</a>
@@ -71,6 +71,7 @@
 
       <!-- end: Content -->
       <!-- start: Javascript -->
+        
       <script src="asset/js/jquery.min.js"></script>
       <script src="asset/js/jquery.ui.min.js"></script>
       <script src="asset/js/bootstrap.min.js"></script>
@@ -87,6 +88,32 @@
           radioClass: 'iradio_flat-aero'
         });
        });
+     </script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+        var config = {
+        apiKey: "AIzaSyCLBFhxMYxAqdnlMHhI6JFI4jqp16FoY0c",
+        authDomain: "boxwood-chassis-125322.firebaseapp.com",
+        databaseURL: "https://boxwood-chassis-125322.firebaseio.com",
+        storageBucket: "boxwood-chassis-125322.appspot.com",
+        };
+        firebase.initializeApp(config);
+        
+        function registerEvent(){
+            var email = $('#email').val();
+            var password = $('#password').val();
+            register(email,password)
+        };
+        
+        function register(email,password){  
+          firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // ...
+            });
+        };
      </script>
      <!-- end: Javascript -->
    </body>
