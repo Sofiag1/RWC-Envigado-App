@@ -42,19 +42,19 @@
 
                   <i class="icons icon-arrow-down"></i>
                   <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                    <input type="text" class="form-text" required>
+                    <input id="email" type="text" class="form-text" required>
                     <span class="bar"></span>
-                    <label>Username</label>
+                    <label>Email</label>
                   </div>
                   <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                    <input type="password" class="form-text" required>
+                    <input id="password" type="password" class="form-text" required>
                     <span class="bar"></span>
                     <label>Password</label>
                   </div>
                   <label class="pull-left">
                   <input type="checkbox" class="icheck pull-left" name="checkbox1"/> Remember me
                   </label>
-                  <input type="submit" class="btn col-md-12" value="SignIn"/>
+                  <input type="submit" class="btn col-md-12" value="SignIn" onclick="signInEvent();"/>
               </div>
                 <div class="text-center" style="padding:5px;">
                     <a href="forgotpass.html">Forgot Password </a>
@@ -84,6 +84,44 @@
         });
        });
      </script>
+        
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.js"></script>
+    
+    <script>
+         // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyCLBFhxMYxAqdnlMHhI6JFI4jqp16FoY0c",
+            authDomain: "boxwood-chassis-125322.firebaseapp.com",
+            databaseURL: "https://boxwood-chassis-125322.firebaseio.com",
+            storageBucket: "boxwood-chassis-125322.appspot.com",
+          };
+
+        firebase.initializeApp(config);
+        
+        function signInEvent(){
+            var email = $('#email').val();
+            var password = $('#password').val();
+            signIn(email,password);
+        };
+        
+        function signIn(email,password){  
+            try {
+                
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+              // Handle Errors here.
+              if(error){
+                    var errorCode = error.code;
+                    var errorMessage = error.message;   
+                    alert(error.message);
+                  }
+              // ...
+            });
+                
+            }catch (e){}
+        } 
+     </script>    
      <!-- end: Javascript -->
    </body>
    </html>
