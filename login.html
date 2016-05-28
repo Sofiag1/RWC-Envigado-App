@@ -44,7 +44,7 @@
                   <div class="form-group form-animate-text" style="margin-top:40px !important;">
                     <input id="email" type="text" class="form-text" required>
                     <span class="bar"></span>
-                    <label>Email</label>
+                    <label>Username</label>
                   </div>
                   <div class="form-group form-animate-text" style="margin-top:40px !important;">
                     <input id="password" type="password" class="form-text" required>
@@ -62,6 +62,7 @@
                 </div>
           </div>
         </form>
+          <a id="redirect" href="index.html"></a>
 
       </div>
 
@@ -85,28 +86,52 @@
        });
      </script>
         
-    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>    
     
     <script>
          // Initialize Firebase
-          var config = {
+           var config = {
             apiKey: "AIzaSyCLBFhxMYxAqdnlMHhI6JFI4jqp16FoY0c",
             authDomain: "boxwood-chassis-125322.firebaseapp.com",
             databaseURL: "https://boxwood-chassis-125322.firebaseio.com",
             storageBucket: "boxwood-chassis-125322.appspot.com",
           };
-
-        firebase.initializeApp(config);
-        
+          firebase.initializeApp(config);
         function signInEvent(){
             var email = $('#email').val();
             var password = $('#password').val();
-            signIn(email,password);
+            //signInFirebase(email,password);
+            signInLocalStorage(email,password);
         };
         
-        function signIn(email,password){  
+        function signInLocalStorage(email,password){            
+            
+            if(validateSession(email,password)){
+                alert("Success");
+                var a = $('#redirect');
+                a.click();
+                window.location.href = "index.html";
+                window.location.href = "/index.html";
+                window.location.href = "../index.html";
+                $(location).attr('href', "index.html");
+            } else {
+                alert("Invalid user or password");
+            }                                    
+        };
+        
+        
+        function validateSession (username,email){                       
+            var localUsr = window.localStorage.getItem("username");
+            var localPass =  window.localStorage.getItem("password");
+            if(username !== undefined && password !== undefined){
+                if (localUsr === username && localPass === email){
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        function signInFirebase(email,password){  
             try {
                 
             firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
